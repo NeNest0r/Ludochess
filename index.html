@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ludo-Chess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="game-area">
+        <div class="header-controls">
+          <div class="turn-info" id="turn-indicator">Загрузка...</div>
+          <button class="restart-btn" onclick="initBoard()">Новая игра</button>
+        </div>
+
+        <div class="slot-machine-wrapper">
+          <div class="casino-container">
+            <div class="casino-slots" id="casino-slots"></div>
+            <div class="spin-controls">
+              <div class="spin-btn-group">
+                <button class="spin-btn" id="spin-btn" onclick="humanSpin()">
+                  КРУТИТЬ
+                </button>
+                <button
+                  type="button"
+                  class="autospin-btn"
+                  id="autospin-btn"
+                  onclick="toggleAutospin()"
+                  title="Автопрокрутка"
+                >
+                  🔄
+                </button>
+              </div>
+              <div
+                class="equilibrium-notice"
+                id="equilibrium-notice"
+                style="display: none"
+              >
+                ⚖️ Доступен бесплатный переброс!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Превью пророчества -->
+        <div
+          class="prophecy-container"
+          id="prophecy-container"
+          style="display: none"
+        >
+          <span class="prophecy-label">Пророчество (след. броски):</span>
+          <div class="prophecy-slots" id="prophecy-slots"></div>
+        </div>
+
+        <!-- Панель верхнего игрока (Бота) -->
+        <div class="player-info" id="top-info">
+          <div class="info-group">
+            <div class="captured-pieces" id="top-captured"></div>
+            <div class="score-advantage" id="top-advantage"></div>
+          </div>
+        </div>
+
+        <div class="board" id="board">
+          <svg class="arrows-svg" id="arrows-svg"></svg>
+        </div>
+
+        <!-- Панель нижнего игрока (Человека) -->
+        <div class="player-info" id="bottom-info">
+          <div class="info-group">
+            <div class="captured-pieces" id="bottom-captured"></div>
+            <div class="score-advantage" id="bottom-advantage"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="controls">
+          <div class="control-group">
+            <label for="modifier-toggle">Режим игры:</label>
+            <select id="modifier-toggle" onchange="toggleModifiers(this.value)">
+              <option value="off" selected>Без модификаторов</option>
+              <option value="on">С модификаторами</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="theme-select">Тема оформления:</label>
+            <select id="theme-select" onchange="changeTheme(this.value)">
+              <option value="default" selected>Стандартная</option>
+              <option value="wood">Классическое дерево</option>
+              <option value="green">Зелёная доска</option>
+            </select>
+          </div>
+
+          <div class="control-group">
+            <label for="bot-difficulty">Сложность бота:</label>
+            <select id="bot-difficulty">
+              <option value="easy">Лёгкий</option>
+              <option value="medium" selected>Средний</option>
+              <option value="hard">Сложный</option>
+            </select>
+          </div>
+        </div>
+
+        <h3>История ходов</h3>
+        <div class="log-container" id="log"></div>
+
+        <div class="modifier-card" id="modifier-card" style="display: none">
+          <div class="modifier-title">
+            Модификатор: <span id="modifier-name">-</span>
+          </div>
+          <div class="modifier-desc" id="modifier-desc">-</div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
